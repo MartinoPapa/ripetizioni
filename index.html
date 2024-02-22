@@ -18,7 +18,7 @@
         <h2>Contattami</h2>
         <h4><a target="_blank" href="https://wa.me/3938885176"><img src = "img/whatsapp.svg" alt="Whatsapp"/></a></h4>
         <h2>O se preferisci inserisci il tuo numero e ti contatterò io</h2>
-        <form name="contact" method="POST" data-netlify="true">
+        <form name="contact" method="POST" data-netlify="true" netlify>
             <input name="telefono" placeholder="numero di telefono" type="tel" tabindex="3"
                     pattern="[0-9]{10}" title="inserisci un numero di telefono valido" required>
             <button name="submit" type="submit" id="contact-submit" data-submit="...Sending"><span class="material-icons">send</span></button>
@@ -35,7 +35,6 @@
         const formData = new FormData(myForm);
         var button = document.getElementById("contact-submit");
         button.disabled = true;
-        button.innerHTML = `Attendere...`;
 
         fetch("/", {
             method: "POST",
@@ -44,7 +43,7 @@
         })
             .then(() => {
                 console.log("Form successfully submitted")
-                button.innerHTML = `Messaggio inviato!`;
+                alert("Grazie, ti contatterò appena possibile!");
             })
             .catch((error) => {
                 alert("sembra che qualcosa sia andato storto, si prega di riprovare. Se il proplema persiste potete contattarmi via mail o whatsapp");
