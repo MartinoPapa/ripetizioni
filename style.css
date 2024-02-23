@@ -76,6 +76,10 @@ fieldset{
   padding: 0;
 }
 
+form p{
+  display: none;
+}
+
 .whatsapp-chat-window {
   left: var(--wa-chat-left);
   right: var(--wa-chat-right);
