@@ -1,58 +1,91 @@
 <!DOCTYPE html>
+<html lang="ita">
 
 <head>
-    <title>Martino Papa</title>
-    <link rel="icon" type="image/x-icon" href="img/icon.svg">
-    <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./style.css">
+	<title>Martino Papa</title>
+	<link rel="icon" type="image/x-icon" href="img/icon.svg">
 </head>
 
 <body>
-    <div class="center">
-        <h3>Ciao sono Martino, da poco laureato in Matematica</h3>
-        <h2>Se ti servono ripetizioni di</h2>
-        <h4>Matematica</h4>
-        <h4>Informatica</h4>
-        <h4>Fisica</h4>
-        <h2>Contattami</h2>
-        <h4><a target="_blank" href="https://wa.me/3938885176"><img src = "img/whatsapp.svg" alt="Whatsapp"/></a></h4>
-        <h2>O se preferisci inserisci il tuo numero e ti contatterò io</h2>
-        <form name="contact" method="POST" data-netlify="true" netlify>
-            <input name="telefono" placeholder="numero di telefono" type="tel" tabindex="3"
-                    pattern="[0-9]{10}" title="inserisci un numero di telefono valido" required>
-            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending"><span class="material-icons">send</span></button>
-        </form>
-        <p>Lascio qui il link al mio sito un po più serio in caso vogliate consultare il mio curriculum o farvi gli affari miei: <a href="https://martinopapa.netlify.app/#">Il mio bel sito</a></p>
-    </div>
+	<!-- partial:index.partial.html -->
+	<div class="whatsapp-chat center">
+		<div class="whatsapp-chat-window">
+			<div class="whatsapp-chat-header">
+				<img src="img/me.enc" class="whatsapp-chat-contact-img">
+				<div class="whatsapp-chat-contact-info">
+					<strong>Martino</strong>
+					<small>
+						Ripetizioni
+						•
+						<span class="text-wa-light-green">Online</span>
+					</small>
+				</div>
+			</div>
+			<div class="whatsapp-chat-body">
+				<p class="whatsapp-chat-bubble">
+					Ciao sono Martino, da poco mi sono laureato in Matematica.
+				</p>
+				<p class="whatsapp-chat-bubble">
+					<span>Ti servono ripetizioni di Matematica, Informatica o Fisica?</span> Contattami direttamente da qui, risponderò il prima possibile.
+				</p>
+				<form data-netlify="true" netlify>
+					<label for="whatsapp-name" class="whatsapp-chat-green-bubble">
+						<input type="text" id="whatsapp-name" placeholder="Nominativo" required class="whatsapp-chat-input">
+					</label>
+					<label for="whatsapp-phone" class="whatsapp-chat-green-bubble">
+						<input type="tel" id="whatsapp-phone" placeholder="Numero di telefono" pattern="[0-9]{10}"
+							title="inserisci un numero di telefono valido" required class="whatsapp-chat-input">
+					</label>
+					<button type="submit" class="whatsapp-chat-btn" id="contact-submit">
+						INVIA
+					</button>
+				</form>
+				<p class="whatsapp-chat-bubble">
+					Se vuoi scoprire di più su di me ecco il link al mio
+					<a href="CV-ITA.pdf" target="_blank">curriculum</a>.
+				</p>
+				<p class="whatsapp-chat-bubble">
+					Telefono: <a href="tel:3938885176">393-888-5176</a><br>
+					Email: <a href="mailto:martino.papa.tn@gmail.com">martino.papa.tn@gmail.com</a><br>
+					Instagram: <a href="https://www.instagram.com/martino_papa/" target="_blank">martino_papa</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<!-- partial -->
+
 </body>
-
 <script type="text/javascript">
-    const handleSubmit = (event) => {
-        event.preventDefault();
+	const handleSubmit = (event) => {
+		event.preventDefault();
 
-        const myForm = event.target;
-        const formData = new FormData(myForm);
-        var button = document.getElementById("contact-submit");
-        button.disabled = true;
+		const myForm = event.target;
+		const formData = new FormData(myForm);
+		var button = document.getElementById("contact-submit");
+		button.disabled = true;
+		button.innerHTML = "Attendere..."
 
-        fetch("/", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(formData).toString(),
-        })
-            .then(() => {
-                console.log("Form successfully submitted")
-                alert("Grazie, ti contatterò appena possibile!");
-            })
-            .catch((error) => {
-                alert("sembra che qualcosa sia andato storto, si prega di riprovare. Se il proplema persiste potete contattarmi via mail o whatsapp");
-                button.innerHTML = `Invia`;
-                button.disabled = false;
-            });      
-    };
+		fetch("/", {
+			method: "POST",
+			headers: { "Content-Type": "application/x-www-form-urlencoded" },
+			body: new URLSearchParams(formData).toString(),
+		})
+			.then(() => {
+				console.log("Form successfully submitted")
+				button.innerHTML = "Messaggio Inviato!"
+			})
+			.catch((error) => {
+				alert("sembra che qualcosa sia andato storto, si prega di riprovare. Se il proplema persiste potete contattarmi via mail o whatsapp");
+				button.innerHTML = `Invia`;
+				button.disabled = false;
+			});
+	};
 
-    document
-        .querySelector("form")
-        .addEventListener("submit", handleSubmit);
+	document
+		.querySelector("form")
+		.addEventListener("submit", handleSubmit);
 </script>
+
+</html>
