@@ -40,8 +40,9 @@
 					</label>
 					<label for="whatsapp-phone" class="whatsapp-chat-green-bubble">
 						<fieldset>
-							<input name="telefono" type="tel" id="whatsapp-phone" placeholder="Numero di telefono" pattern="[0-9]{10}"
-								title="inserisci un numero di telefono valido" required class="whatsapp-chat-input">
+							<input name="telefono" type="tel" id="whatsapp-phone" placeholder="Numero di telefono"
+								pattern="[0-9]{10}" title="inserisci un numero di telefono valido" required
+								class="whatsapp-chat-input">
 						</fieldset>
 					</label>
 					<button type="submit" class="whatsapp-chat-btn" id="contact-submit">
@@ -68,16 +69,18 @@
 		event.preventDefault();
 
 		const myForm = event.target;
-		console.log(myForm)
 		const formData = new FormData(myForm);
 		var button = document.getElementById("contact-submit");
 		button.disabled = true;
 		button.innerHTML = "Attendere..."
-
+		s="";
+		for (var [key, value] of formData.entries()) {
+			s += key + ": " + value +"\n";
+		}
 		fetch("/", {
 			method: "POST",
 			headers: { "Content-Type": "application/x-www-form-urlencoded" },
-			body: new URLSearchParams(...formData).toString(),
+			body: s,
 		})
 			.then(() => {
 				console.log("Form successfully submitted")
