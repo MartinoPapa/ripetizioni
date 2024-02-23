@@ -53,6 +53,8 @@
   box-sizing: border-box;
 }
 
+body{overflow: hidden;}
+
 .center{
   position: absolute;
   margin: 0;
@@ -90,6 +92,7 @@ form p{
   transition: 0.4s;
 }
 .whatsapp-chat-header {
+  position: relative;
   background: var(--wa-chat-dark-green);
   color: var(--wa-chat-white);
   display: flex;
