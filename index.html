@@ -34,13 +34,13 @@
 				<form method="POST" data-netlify="true" netlify>
 					<label for="whatsapp-name" class="whatsapp-chat-green-bubble">
 						<fieldset>
-							<input type="text" id="whatsapp-name" placeholder="Nominativo" required
+							<input name="nome" type="text" id="whatsapp-name" placeholder="Nominativo" required
 								class="whatsapp-chat-input">
 						</fieldset>
 					</label>
 					<label for="whatsapp-phone" class="whatsapp-chat-green-bubble">
 						<fieldset>
-							<input type="tel" id="whatsapp-phone" placeholder="Numero di telefono" pattern="[0-9]{10}"
+							<input name="telefono" type="tel" id="whatsapp-phone" placeholder="Numero di telefono" pattern="[0-9]{10}"
 								title="inserisci un numero di telefono valido" required class="whatsapp-chat-input">
 						</fieldset>
 					</label>
@@ -68,6 +68,7 @@
 		event.preventDefault();
 
 		const myForm = event.target;
+		console.log(myForm)
 		const formData = new FormData(myForm);
 		var button = document.getElementById("contact-submit");
 		button.disabled = true;
@@ -76,7 +77,7 @@
 		fetch("/", {
 			method: "POST",
 			headers: { "Content-Type": "application/x-www-form-urlencoded" },
-			body: new URLSearchParams(formData).toString(),
+			body: new URLSearchParams(...formData).toString(),
 		})
 			.then(() => {
 				console.log("Form successfully submitted")
